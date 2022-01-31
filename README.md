@@ -1,26 +1,22 @@
-[![NPM Version][npm-image]][npm-url]
+<!-- [![NPM Version][npm-image]][npm-url]
 [![NPM Downloads][downloads-image]][downloads-url]
 [![Test Coverage][travis-image]][travis-url]
 [![Coverage][coverage-image]][coverage-url]
 
 [npm-image]: https://img.shields.io/npm/v/unzipper.svg
-[npm-url]: https://npmjs.org/package/unzipper
+[npm-url]: https://npmjs.org/package/nextpoint-unzipper
 [travis-image]: https://api.travis-ci.org/ZJONSSON/node-unzipper.png?branch=master
-[travis-url]: https://travis-ci.org/ZJONSSON/node-unzipper?branch=master
+[travis-url]: https://travis-ci.org/ZJONSSON/node-nextpoint-unzipper?branch=master
 [downloads-image]: https://img.shields.io/npm/dm/unzipper.svg
-[downloads-url]: https://npmjs.org/package/unzipper
+[downloads-url]: https://npmjs.org/package/nextpoint-unzipper
 [coverage-image]: https://3tjjj5abqi.execute-api.us-east-1.amazonaws.com/prod/node-unzipper/badge
-[coverage-url]: https://3tjjj5abqi.execute-api.us-east-1.amazonaws.com/prod/node-unzipper/url
+[coverage-url]: https://3tjjj5abqi.execute-api.us-east-1.amazonaws.com/prod/node-unzipper/url -->
 
-# unzipper
+# nextpoint-unzipper
 
-This is an active fork and drop-in replacement of the [node-unzip](https://github.com/EvanOxfeld/node-unzip) and addresses the following issues:
-* finish/close events are not always triggered, particular when the input stream is slower than the receivers
-* Any files are buffered into memory before passing on to entry
-
-The structure of this fork is similar to the original, but uses Promises and inherit guarantees provided by node streams to ensure low memory footprint and emits finish/close events at the end of processing.   The new `Parser` will push any parsed `entries` downstream if you pipe from it, while still supporting the legacy `entry` event as well.
-
-Breaking changes: The new `Parser` will not automatically drain entries if there are no listeners or pipes in place.
+This is an active fork of [node-unzipper](https://github.com/ZJONSSON/node-unzipper) and addresses the following issues:
+* Fixes unzipping from central directory (with unzipper.Open method) by fixing errors that occurred at ~40 entries to allow unzipping an entire zip file with this method.
+* Speeds up unzipping password protected zips by updating crc hashing using BigInt with minimal conversions between numbers and BigInts.
 
 Unzipper provides simple APIs similar to [node-tar](https://github.com/isaacs/node-tar) for parsing and extracting zip files.
 There are no added compiled dependencies - inflation is handled by node.js's built in zlib support.
@@ -32,7 +28,7 @@ Chrome extension files (.crx) are zipfiles with an [extra header](http://www.ada
 ## Installation
 
 ```bash
-$ npm install unzipper
+$ npm install nextpoint-unzipper
 ```
 
 ## Quick Examples
